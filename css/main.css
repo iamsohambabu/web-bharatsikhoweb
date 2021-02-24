@@ -948,11 +948,6 @@
 		text-align: center;
 		align-content: center;
 	}
-	.do-it-center{
-			
-		position: relative;
-		left: 90px;
-	}
 	header .logo {
 		text-align: center;
 	 }
@@ -1052,9 +1047,7 @@
 	 position: relative;
  }
  .main-content-tablecell {
-	 display: table-cell;
-	 vertical-align: bottom;
-	 z-index: 700;
+	 margin-top: 20em;
  }
  .main-content-tablecell .row {
 	 position: relative;
