@@ -28,9 +28,11 @@
 
 <script>
 
-    async function doRequest() {
-        let url = 'http://bharatsikho.tutorialscentric.com/api/share/7l29N3MJDMqRgEEk45EmncQPw9aiciuzgZvYDDpqS4EYzRirawP1qfU37T22JZehksMxKqmnhdVGkYFGadbUDkSVGzXh7sZ8b+TLncmVZ8SQaHh5FFyBk6ZiXKAHwBID0GxWDHih+PqE99FyEi2+dECh1z8FpqbTTzMGfQl4OiP4UshMIhqvqSlGjw==';
-        let res = await fetch(url);
+    async function doRequest(shareId) {
+        let url = 'http://bharatsikho.tutorialscentric.com/api/share/'+shareId;
+        //let url = encodeURI("http://bharatsikho.tutorialscentric.com/api/share/7l29N3MJDMqRgEEk45EmncQPw9aiciuzgZvYDDpqS4EYzRirawP1qfU37T22JZehksMxKqmnhdVGkYFGadbUDkSVGzXh7sZ8b+TLncmVZ8SQaHh5FFyBk6ZiXKAHwBID0GxWDHih+PqE99FyEi2+dECh1z8FpqbTTzMGfQl4OiP4UshMIhqvqSlGjw==");
+        console.log(url);
+        let res = await fetch(url,{mode:"same-origin"});
         if (res.ok) {
             let json = await res.json();
             return json;
@@ -40,8 +42,15 @@
     }
 
     function callShareAPI(){
-        
+        const queryString = window.location.search;
+        console.log(queryString);
+        const urlParams = new URLSearchParams(queryString);
+        const shareId = urlParams.get('id');
+        console.log(shareId);
+        //http://bharatsikho.tutorialscentric.com/api/share/7l29N3MJDMqRgEEk45EmncQPw9aiciuzgZvYDDpqS4EYzRirawP1qfU37T22JZehksMxKqmnhdVGkYFGadbUDkSVGzXh7sZ8b+TLncmVZ8SQaHh5FFyBk6ZiXKAHwBID0GxWDHih+PqE99FyEi2+dECh1z8FpqbTTzMGfQl4OiP4UshMIhqvqSlGjw==
+        //dolet shareId= '7l29N3MJDMqRgEEk45EmncQPw9aiciuzgZvYDDpqS4EYzRirawP1qfU37T22JZehksMxKqmnhdVGkYFGadbUDkSVGzXh7sZ8b+TLncmVZ8SQaHh5FFyBk6ZiXKAHwBID0GxWDHih+PqE99FyEi2+dECh1z8FpqbTTzMGfQl4OiP4UshMIhqvqSlGjw==';
         doRequest(shareId).then(shareApiResponse=>{
+            console.log("shareApiResponse",shareApiResponse);
             if(shareApiResponse == undefined || shareApiResponse.length == 0){
                 alert("Please ask to reshare again!!");
                 return;
